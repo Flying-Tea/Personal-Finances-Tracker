@@ -1,12 +1,12 @@
-import { cva, type VariantProps } from "class-variance-authority";
-import type { ComponentProps } from "react";
+import { cva, type VariantProps } from "class-variance-authority"
+import type { ComponentProps } from "react"
 
 const buttonStyles = cva(
   "px-4 py-2 rounded-lg font-medium transition-colors",
   {
     variants: {
       intent: {
-        primary: "bg-primary text-white hover:bg-primary/80",
+        primary: "bg-primary text-white hover:bg-primary/80", // Kept for future accessability
         secondary: "bg-secondary text-white hover:bg-secondary-hover",
       },
       size: {
@@ -22,10 +22,8 @@ const buttonStyles = cva(
   }
 )
 
-type ButtonProps = VariantProps<typeof buttonStyles> & ComponentProps<"button">;
+type ButtonProps = VariantProps<typeof buttonStyles> & ComponentProps<"button">
 
-const ReuseButton = ({ intent, size, ...props}: ButtonProps) => {
-    return <button {...props} className={buttonStyles({intent, size})}></button>
-};
-
-export default ReuseButton;
+export function ReuseButton({ intent, size, ...props}: ButtonProps) {
+  return <button {...props} className={buttonStyles({ intent, size })}></button>
+}

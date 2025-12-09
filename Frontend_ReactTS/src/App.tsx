@@ -1,17 +1,18 @@
-
 import './App.css'
-import {Navbar} from './layouts/HomeNavBar'
+import { HomeNavBar } from './layouts/HomeNav'
+import HomeBg from './assets/HomeBg.jpg'
 
 function App() {
   return (
-    <>
-      <div className='min-h-screen bg-gray-900 text-white'>
+    <div className="min-h-screen bg-gray-900 text-white overflow-hidden">
+      <img src={HomeBg} alt="Background" className="fixed inset-0 w-full h-full object-cover opacity-100 z-0" />
+      <div className="relative z-10">
+        <HomeNavBar />
         <div>
-          <Navbar/>
+          <h1 className="text-6xl font-bold text-center mt-20 text-black">Personal Finances Tracker</h1>
         </div>
-        <div>bob</div>
       </div>
-    </>
+    </div>
   )
 }
 
