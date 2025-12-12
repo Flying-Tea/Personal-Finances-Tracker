@@ -7,7 +7,7 @@ export function HomeNavBar(){
             <h1 className="flex text-2xl font-bold ml-10 lg:ml-0 p-4"><SquareLibrary></SquareLibrary>OsmondSolutions</h1>
         </div>
             <div className = "flex ml-auto gap-4 items-center shrink-0 mr-10 lg:mr-5">
-                <ReuseButton intent="primaryButton" href="/" className="flex items-center gap-2 border-2 p-2 rounded-lg hover:bg-teal-500">
+                <ReuseButton intent="primaryButton" href="/Home" className="flex items-center gap-2 border-2 p-2 rounded-lg hover:bg-teal-500">
                     <Home />
                     <span>Home</span>
                 </ReuseButton>
