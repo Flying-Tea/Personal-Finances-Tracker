@@ -2,6 +2,7 @@ import './App.css'
 import { HomeNavBar } from './components/layouts/HomeNav'
 import HomeBg from './assets/HomeBg.jpg'
 import FeatureSection1 from './components/layouts/FeatureSection'
+import CustomFooter from './components/layouts/Footer'
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
       {/* Rest of the page content */}
       <div className="p-5 relative z-10">
         <FeatureSection1 />
+      </div>
+      <div>
+        <CustomFooter/>
       </div>
     </div>
   )

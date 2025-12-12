@@ -10,30 +10,30 @@ export interface Feature {
 
 const features: Feature[] = [
   {
-    title: "Revolutionary Projectview",
-    description: "Plan and structure work how you want. Quickly organizing tasks.",
+    title: "User Interface",
+    description: "Plan and structure your finances how you want. Quickly organizing goals.",
     icon: <ListChecks />,
   },
   {
-    title: "App Integrations",
-    description: "Bring all your tools and data together. Also join with hundreds of other apps.",
+    title: "App Productivity",
+    description: "Bring all your financial data together on one platform. With unparalleled organization.",
     icon: <AppWindow />,
   },
   {
     title: "Data Reporting",
-    description: "Get real time insight into progress and allows teams to track their work habits.",
+    description: "Get real time insight into your progress and track all your expenditures.",
     icon: <ChartBar />,
   },
   {
-    title: "Workflow Builder",
-    description: "Automated processes to coordinate your teams and increase communication.",
+    title: "Payment Management",
+    description: "Automate your monthly payments, income entries, and rid wasteful spending.",
     icon: <Workflow />,
   },
 ];
 
 const FeatureCard: React.FC<Feature> = ({ title, description, icon }) => (
   <div className="flex flex-col items-center p-6 text-center">
-    <div className="w-20 h-20 text-3xl flex items-center justify-center rounded-md bg-primary/5 text-primary mb-4">
+    <div className="w-20 h-20 text-3xl flex items-center justify-center rounded-md bg-secondary/5 text-secondary mb-4">
       {icon}
     </div>
     <h3 className="text-xl font-semibold mb-2">{title}</h3>
@@ -65,13 +65,13 @@ const FeatureSection1: React.FC<FeatureSection1Props> = ({
   } = featureBadge ?? {};
 
   const {
-    text: mainHeadingText = "Unlock Powerful Capabilities",
+    text: mainHeadingText = "Unlock Financial Clarity with Our Comprehensive Features",
     className: mainHeadingClassName = "",
   } = mainHeading ?? {};
 
   const {
     text: subHeadingText =
-      "Discover how our features can help you achieve your goals and streamline your workflow",
+      "Discover how our features can help you achieve your financial goals with ease and efficiency.",
     className: subHeadingClassName = "",
   } = subHeading ?? {};
 
