@@ -23,7 +23,7 @@ const LeftSideBar = () => {
 
   return (
     <motion.div
-        initial={{ width: 60 }}
+        initial={{ width: 80 }}
         animate={{ width: isOpen ? 300 : 80 }}
         transition={{ duration: 0.4 }}
         className="fixed bg-gray-800 text-white h-full p-4 transition-all duration-300 shadow-lg">
