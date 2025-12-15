@@ -11,13 +11,13 @@ const CustomFooter = () => {
 
         <div className="max-w-10xl mx-auto flex flex-col md:flex-row justify-between items-start">
             <div>
-            <h2 className="text-lg font-bold mt-4">Any Inquirys? Contact Us At:</h2>
-            <p className="text-sm opacity-60">Email: RealEmail@OsmondSolutions.com</p>
-            <p className="text-sm opacity-60">Phone: +1 (555) 123-4567</p>
+                <h2 className="text-lg font-bold mt-4">Any Inquirys? Contact Us At:</h2>
+                <p className="text-sm opacity-60 select-all">Email: RealEmail@OsmondSolutions.com</p>
+                <p className="text-sm opacity-60 select-all">Phone: +1 (555) 123-4567</p>
             </div>
             <div className="text-right mt-8">
-            <h2 className="text-lg font-bold">OsmondSolutions © 2025. All rights reserved.</h2>
-            <p className="text-sm opacity-60">Your trusted partner in personal finance management.</p>
+                <h2 className="text-lg font-bold">OsmondSolutions © 2025. All rights reserved.</h2>
+                <p className="text-sm opacity-60">Your trusted partner in personal finance management.</p>
             </div>
         </div>
         </footer>

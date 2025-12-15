@@ -6,7 +6,7 @@ import CustomFooter from './components/layouts/Footer'
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-gray-900 text-white select-none">
       {/* Background top image THIS TOOK SO LONG ;( */}
       <div className="relative h-[700px] bg-fixed bg-cover bg-center" style={{ backgroundImage: `url(${HomeBg})` }}>
       

@@ -4,7 +4,7 @@ import { HomeNavBar } from "@/components/ui/HomeNav";
 
 export default function About() {
     return (
-        <div>
+        <div className="select-none">
             <div className="bg-gray-900 text-white">
                 <HomeNavBar />
             </div>
