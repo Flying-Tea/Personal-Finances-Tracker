@@ -1,9 +1,8 @@
-import LeftSideBar from "@/components/ui/SideBar";
-
+import LeftSideBar from "@/components/ui/SideBar"
 
 export default function UserHome(){
-    return <div>
-    <LeftSideBar/>
+    return <div className="flex">
+        <LeftSideBar/>
 
     </div>
 

@@ -9,7 +9,7 @@ export default function About() {
                 <HomeNavBar />
             </div>
             <div className="min-h-screen bg-gray-800 text-black flex flex-col items-center justify-center p-8 space-y-6 ">
-                <div className="bg-blue-200 p-10 rounded-lg shadow-md max-w-6xl border-1 place-items-start mx-auto">
+                <div className="bg-blue-200 p-10 rounded-lg shadow-md max-w-6xl border place-items-start mx-auto">
                     <h1 className="text-4xl font-bold mb-6">About OsmondSolutions</h1>
                     <p className="max-w-3xl text-center mb-4">
                         OsmondSolutions is dedicated to providing users with a comprehensive personal finance management tool. Our mission is to empower individuals to take control of their financial health through intuitive design and powerful features.
