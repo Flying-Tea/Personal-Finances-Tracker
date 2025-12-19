@@ -1,5 +1,5 @@
 import { User } from "lucide-react"
-import { ReuseButton } from "../ui/Button"
+import { ReuseButton } from "../ui/MyButton"
 
 const CustomFooter = () => {
     return (

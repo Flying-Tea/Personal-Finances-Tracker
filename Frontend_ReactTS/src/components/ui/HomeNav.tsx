@@ -1,5 +1,5 @@
 import { Home, Signature, SquareLibrary, User } from "lucide-react"
-import { ReuseButton } from "./Button"
+import { ReuseButton } from "./MyButton"
 
 export function HomeNavBar(){
     return <nav className = "flex gap-10 lg:gap-20 fixed top-0 w-full z-50 transition-all duration-300 bg-slate-950/20 backdrop-blur-sm border-b">

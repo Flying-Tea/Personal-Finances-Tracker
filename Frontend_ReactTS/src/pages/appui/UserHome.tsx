@@ -6,29 +6,35 @@ import { FaBug } from "react-icons/fa";
 
 const cards = [{ // later connect to accounts and user input data
     title: "Balance",
-    value: "$1,567",
+    value: "$ N/A",
     icon: <FaBug />,
     colors: { bgColor: "bg-slate-800 text-white", iconColor: "text-blue-600" },
-    metricDelta: "0.15",
+    metricDelta: "N/A",
     positiveMetric: true,
 },
 {
     title: "Monthly Expenses",
-    value: "$4,567",
+    value: "$ N/A",
     icon: <FaBug />,
     colors: { bgColor: "bg-slate-800 text-white", iconColor: "text-green-600" },
+    metricDelta: "N/A",
+    positiveMetric: true,
 },
 {
     title: "Savings",
-    value: "$10,567",
+    value: "$ N/A",
     icon: <FaBug />,
     colors: { bgColor: "bg-slate-800 text-white", iconColor: "text-yellow-600" },
+    metricDelta: "N/A",
+    positiveMetric: true,
 },
 {
     title: "Investments",
-    value: "$25,567",
+    value: "$ N/A",
     icon: <FaBug />,
     colors: { bgColor: "bg-slate-800 text-white", iconColor: "text-purple-600" },
+    metricDelta: "N/A",
+    positiveMetric: true,
 }
 ]
 
@@ -50,7 +56,6 @@ const UserHome: React.FC = () => {
         <div className="p-8">
             <StatCards3 cards={cards} showIcons={false}/>
         </div>
-            
 
         </motion.div>
     </div>

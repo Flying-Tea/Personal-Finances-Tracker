@@ -1,9 +1,10 @@
 import LeftSideBar from "@/components/ui/SideBar"
 import React from "react";
 import { motion } from "framer-motion";
+import GridComponent from "@/components/AGGrid";
 
 
-const UserHome: React.FC = () => {
+const AccountHistory: React.FC = () => {
     const [isOpen, setIsOpen] = React.useState(false);
 
     return <div className="flex bg-slate-600 min-h-screen text-white select-none">
@@ -18,8 +19,8 @@ const UserHome: React.FC = () => {
             <h1 className="text-3xl font-bold">Transaction History</h1>
         </div>
 
-        <div className="p-8">
-            
+        <div className="p-4">
+            <GridComponent />
         </div>
             
 
@@ -27,4 +28,4 @@ const UserHome: React.FC = () => {
     </div>
 }
 
-export default UserHome;
+export default AccountHistory;

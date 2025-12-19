@@ -1,7 +1,6 @@
 import CustomFooter from "@/components/layouts/Footer";
 import { HomeNavBar } from "@/components/ui/HomeNav";
 
-
 export default function About() {
     return (
         <div className="select-none">

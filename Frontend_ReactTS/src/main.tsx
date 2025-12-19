@@ -7,6 +7,7 @@ import About from './pages/About.tsx'
 import UserHome from './pages/appui/UserHome.tsx'
 import AccountHistory from './pages/appui/AccountHistory.tsx'
 import Budgets from './pages/appui/Budget.tsx'
+import Saving from './pages/appui/Saving.tsx'
 
 // Create a router object
 const router = createBrowserRouter([
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: '/budgets',
     element: <Budgets />,
+  },
+  {
+    path: '/savings',
+    element: <Saving />,
   },
   // Add more routes as needed
 ])

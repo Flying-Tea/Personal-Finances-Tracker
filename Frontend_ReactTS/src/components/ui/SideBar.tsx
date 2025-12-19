@@ -2,13 +2,13 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FaBars } from "react-icons/fa";
 import { SquareLibrary } from "lucide-react";
-import { ReuseButton } from "./Button";
+import { ReuseButton } from "./MyButton";
 
 const sideBarItems = [
   { routerLink: "/userHome", icon: "🏠", title: "Dashboard" },
   { routerLink: "/accountHistory", icon: "💸", title: "Transactions" },
   { routerLink: "/budgets", icon: "📊", title: "Budgets" },
-  { routerLink: "/reports", icon: "📈", title: "Reports" },
+  { routerLink: "/savings", icon: "📈", title: "Savings" },
   { routerLink: "/settings", icon: "⚙️", title: "Settings" },
 ];
 
@@ -76,12 +76,40 @@ const LeftSideBar: React.FC<Props> = ({isOpen, setIsOpen}) => {
                     variants={textVariant}>
 
                     {char}
-                    </motion.span>  
+                    
+                    </motion.span>  // maybe make a seperate animation for the account username?
                 ))}
                 </span>
             )}
             </a>
         ))}
+        <div className="fixed bottom-4"> 
+          <motion.div
+          initial={{ width: 50 }}
+          animate={{ width: isOpen ? 260 : 50 }}
+          transition={{ duration: 0.65 }}
+          className=" items-center p-2 mt-auto border-t border-gray-700">
+            
+          </motion.div>
+          <div className="flex items-center p-2 rounded hover:bg-gray-700 transition-colors cursor-pointer">
+            <span className="text-2xl">👤</span>
+            {isOpen && (<span className="ml-2 items-center">
+            {Array.from("UserHome").map((char, i) => (
+                <motion.span
+                key={i}
+                custom={i}
+                initial="hidden"
+                animate="visible"
+                variants={textVariant}>
+
+                {char}
+              </motion.span>
+            
+            ))}
+              </span>
+            )}
+          </div>
+        </div>
         </nav>
     </motion.div>
   );
