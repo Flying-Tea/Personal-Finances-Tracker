@@ -128,7 +128,7 @@ const Login = () => {
 
         console.log("Ready for Neon backend:", { email, password });
 
-        // 🔥 FUTURE: Handle success (session, redirect, etc.)
+        // FUTURE: Handle success (session, redirect, etc.)
     } catch (err: unknown) {
         if (err instanceof Error) {
             setError(err.message);
