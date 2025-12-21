@@ -77,7 +77,7 @@ const LeftSideBar: React.FC<Props> = ({isOpen, setIsOpen}) => {
 
                     {char}
                     
-                    </motion.span>  // maybe make a seperate animation for the account username?
+                    </motion.span>
                 ))}
                 </span>
             )}

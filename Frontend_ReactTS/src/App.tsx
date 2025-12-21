@@ -4,6 +4,7 @@ import HomeBg from './assets/HomeBg.jpg'
 import FeatureSection1 from './components/layouts/FeatureSection'
 import CustomFooter from './components/layouts/Footer'
 
+
 function App() {
   return (
     <div className="min-h-screen bg-gray-900 text-white select-none">
