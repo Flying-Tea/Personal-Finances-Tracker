@@ -128,7 +128,7 @@ const Login = () => {
 
         console.log("Ready for Neon backend:", { email, password });
 
-        // 🔥 FUTURE: Handle success (session, redirect, etc.)
+        // FUTURE: Handle success (session, redirect, etc.)
     } catch (err: unknown) {
         if (err instanceof Error) {
             setError(err.message);
@@ -152,7 +152,7 @@ const Login = () => {
                 setEmail={setEmail}
                 password={password}
                 setPassword={setPassword}/>
-                
+
             {/* Inline error popup (same style as Signup) */}
             {error && (
                 <p className="text-red-500 text-sm text-center">{error}</p>

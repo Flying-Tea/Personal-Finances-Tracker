@@ -18,8 +18,6 @@ return (
 };
 
 const SignUpHeader = () => {
-
-
     return (
     <CardHeader className="space-y-1">
         <LogoPlaceholder />
