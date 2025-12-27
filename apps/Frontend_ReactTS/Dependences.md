@@ -11,5 +11,6 @@
 - TailwindCSS
 - Typescript
 - AG Grid
+- Axios
 
 - Credits to shadcn/ui for basic UI/UX imports to streamline development

@@ -3,9 +3,16 @@ import { HomeNavBar } from './components/ui/HomeNav'
 import HomeBg from './assets/HomeBg.jpg'
 import FeatureSection1 from './components/layouts/FeatureSection'
 import CustomFooter from './components/layouts/Footer'
+import { Outlet } from 'react-router-dom'
+import { useState } from 'react'
 
+export interface AppContextType {
+  jwt: string | null;
+  setJwt: React.Dispatch<React.SetStateAction<string | null>>;
+}
 
 function App() {
+  const [jwt, setJwt] = useState<string | null>(null);
   return (
     <div className="min-h-screen bg-gray-900 text-white select-none">
       {/* Background top image THIS TOOK SO LONG ;( */}
@@ -31,6 +38,7 @@ function App() {
       <div>
         <CustomFooter/>
       </div>
+      <Outlet context={{jwt, setJwt}}/>
     </div>
   )
 }

@@ -1,44 +1,73 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using Backend.Data;
+using Backend.Services;
 using DotNetEnv;
+using System.Text;
 
-DotNetEnv.Env.Load(); // load .env
+DotNetEnv.Env.Load(); // Load .env
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Database setup
-var dbUrl = Environment.GetEnvironmentVariable("DATABASE_URL") 
-            ?? throw new Exception("DATABASE_URL missing in .env");
+// Load environment variables
+var dbUrl = Environment.GetEnvironmentVariable("DATABASE_URL")
+    ?? throw new Exception("DATABASE_URL missing in .env");
 
+var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY")
+    ?? throw new Exception("JWT_KEY missing in .env");
+
+// Database setup
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(dbUrl)
 );
 
-// JWT authentication setup
-var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY") 
-             ?? throw new Exception("JWT_KEY missing in .env");
-var key = new SymmetricSecurityKey(Convert.FromBase64String(jwtKey));
+// JWT Authentication setup
+var signingKey = new SymmetricSecurityKey(Convert.FromBase64String(jwtKey));
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = false,
-            ValidateAudience = false,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = key
+            IssuerSigningKey = signingKey,
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ClockSkew = TimeSpan.FromMinutes(5)
         };
     });
 
-// Controllers and Swagger
+// CORS for frontend
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("frontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173") // Vite dev server
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
+// Add HttpClient for AuthService (Mailgun)
+builder.Services.AddHttpClient();
+
+// Register AuthService as scoped (non-static)
+builder.Services.AddScoped(sp =>
+{
+    var db = sp.GetRequiredService<AppDbContext>();
+    var httpClient = sp.GetRequiredService<HttpClient>();
+    return new AuthService(db, jwtKey);
+});
+
+// Add controllers and Swagger
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Adds cleanup database cleanup service
+builder.Services.AddHostedService<CleanupService>();
 
 var app = builder.Build();
 
@@ -50,6 +79,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("frontend");
+
 app.UseAuthentication();
 app.UseAuthorization();
 

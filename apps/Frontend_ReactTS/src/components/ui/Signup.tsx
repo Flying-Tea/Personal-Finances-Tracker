@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -106,36 +108,45 @@ const SignUp1 = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [message, setMessage] = useState("");
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
 
-    // FORM SUBMIT HANDLER
-    // This is where i gotta connect my APIs later
-    
     const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    // Example validation
-    if (password !== confirmPassword) {
-        alert("Passwords do not match");
-        return;
-    }
-    if (password.length < 6) {
-        alert("Password must be at least 6 characters.");
-        return;
-    }
+        if (password !== confirmPassword) {
+            setError("Passwords do not match");
+            return;
+        }
+        if (password.length < 6) {
+            setError("Password must be at least 6 characters.");
+            return;
+        }
 
-    // API CALL WILL GO HERE
-    // Replace this with your future API endpoint
-    // -------------------------------
-    /*
-    await fetch("/api/signup", {
-      method: "POST",
-      body: JSON.stringify({ email, password }),
-    });
-    */
+        try {
+            // Register user
+            const registerRes = await axios.post("http://localhost:5255/api/auth/register", { email, password });
+            setMessage(registerRes.data.message);
+            setError("");
 
-    console.log("Email:", email);
-    console.log("Password:", password);
-  };
+            localStorage.setItem("email", email);
+            navigate("/Login");
+        } catch (err) {
+            let errorMessage = "An unknown error occurred";
+            if (axios.isAxiosError(err)) {
+            if (err.response && err.response.data) {
+                errorMessage = err.response.data as string;
+            } else {
+                errorMessage = err.message;
+            }
+            } else if (err instanceof Error) {
+            errorMessage = err.message;
+            }
+            setError(errorMessage);
+            setMessage("");
+        }
+    };
 
   return (
     <div className="flex items-center justify-center py-4 rounded-2xl bg-neutral-100 dark:bg-neutral-800">
@@ -150,7 +161,8 @@ const SignUp1 = () => {
               setPassword={setPassword}
               confirmPassword={confirmPassword}
               setConfirmPassword={setConfirmPassword}/>
-
+            {message && <p className="text-green-600 mt-2">{message}</p>}
+            {error && <p className="text-red-600 mt-2">{error}</p>}
             </CardContent>
             <CardFooter className="flex flex-col gap-4 mt-6">
             {/* Clicking this button triggers handleSubmit */}

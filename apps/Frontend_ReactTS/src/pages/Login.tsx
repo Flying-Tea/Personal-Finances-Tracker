@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Lock } from "lucide-react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const LogoPlaceholder = () => {
     return (
@@ -91,18 +93,17 @@ const LoginFooter = () => {
 };
 
 const Login = () => {
-    // Future API-ready state
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [error, setError] = React.useState("");
     const [loading, setLoading] = React.useState(false);
+    const [jwt, setJwt] = React.useState<string | null>(null); // in-memory JWT
+    const navigate = useNavigate();
 
-    // Future API-ready handler
     const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
-    // Basic validation (same style as Signup)
     if (!email.includes("@")) {
         setError("Please enter a valid email address.");
         return;
@@ -116,24 +117,21 @@ const Login = () => {
     setLoading(true);
 
     try {
-        // FUTURE: Replace with your Neon-powered backend call
-        // const res = await fetch("/api/login", {
-        //   method: "POST",
-        //   headers: { "Content-Type": "application/json" },
-        //   body: JSON.stringify({ email, password }),
-        // });
+        // Call your backend login endpoint
+        const res = await axios.post("http://localhost:5255/api/auth/login", { email, password });
+        localStorage.setItem("email", email);
 
-        // const data = await res.json();
-        // if (!res.ok) throw new Error(data.message);
+        setJwt(res.data.token);
 
-        console.log("Ready for Neon backend:", { email, password });
-
-        // FUTURE: Handle success (session, redirect, etc.)
+        // Redirect user after login
+        navigate("/userHome");
     } catch (err: unknown) {
-        if (err instanceof Error) {
-            setError(err.message);
+        if (axios.isAxiosError(err)) {
+        setError(err.response?.data || "Login failed. Please try again.");
+        } else if (err instanceof Error) {
+        setError(err.message);
         } else {
-            setError("Login failed. Please try again.");
+        setError("Login failed. Please try again.");
         }
     } finally {
         setLoading(false);

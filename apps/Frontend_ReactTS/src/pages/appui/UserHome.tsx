@@ -50,7 +50,10 @@ const UserHome: React.FC = () => {
         className="flex-1 overflow-auto">
 
         <div className = "flex bg-gray-800 shadow-md p-4 items-center">
-            <h1 className="text-3xl font-bold">User Dashboard</h1>
+            <h1 className="text-3xl font-bold pr-10">User Dashboard</h1>
+            <div className="flex bg-amber-600 shadow-md p-3 items-center rounded-2xl">
+                <p className="ml-auto">Warning this is a product Demo all saved data will be deleted 2 hours after creation.</p>
+            </div>
         </div>
 
         <div className="p-8">

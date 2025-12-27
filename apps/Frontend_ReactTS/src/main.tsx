@@ -10,6 +10,8 @@ import Budgets from './pages/appui/Budget.tsx'
 import Saving from './pages/appui/Saving.tsx'
 import Login from './pages/Login.tsx'
 
+
+
 // Create a router object
 const router = createBrowserRouter([
   {

@@ -12,6 +12,7 @@ const sideBarItems = [
   { routerLink: "/settings", icon: "⚙️", title: "Settings" },
 ];
 
+
 const textVariant = {
   hidden: { opacity: 0, x: -10 },
   visible: (i: number) => ({
@@ -27,7 +28,21 @@ interface Props {
 }
 
 const LeftSideBar: React.FC<Props> = ({isOpen, setIsOpen}) => {
+  const [userEmail, setUserEmail] = React.useState(localStorage.getItem("email") || "User");
+    // Update email when localStorage changes (after login)
+  React.useEffect(() => {
+    const handleStorageChange = () => {
+      setUserEmail(localStorage.getItem("email") || "User");
 
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      
+    };
+  }, []);
   return (
     <motion.div
     initial={{ width: 80 }}
@@ -94,7 +109,7 @@ const LeftSideBar: React.FC<Props> = ({isOpen, setIsOpen}) => {
           <div className="flex items-center p-2 rounded hover:bg-gray-700 transition-colors cursor-pointer">
             <span className="text-2xl">👤</span>
             {isOpen && (<span className="ml-2 items-center">
-            {Array.from("UserHome").map((char, i) => (
+            {Array.from(userEmail).map((char, i) => (
                 <motion.span
                 key={i}
                 custom={i}
