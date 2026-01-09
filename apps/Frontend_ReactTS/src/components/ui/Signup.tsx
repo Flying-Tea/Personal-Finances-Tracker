@@ -126,7 +126,7 @@ const SignUp1 = () => {
 
         try {
             // Register user
-            const registerRes = await axios.post("http://localhost:5255/api/auth/register", { email, password });
+            const registerRes = await axios.post("http://172.16.4.3:5000/api/auth/register", { email, password });
             setMessage(registerRes.data.message);
             setError("");
 

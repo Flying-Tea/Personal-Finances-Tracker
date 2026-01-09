@@ -61,7 +61,7 @@ export const TransactionsGrid: React.FC = () => {
         if (!token) return;
 
         const response = await axios.get<Transaction[]>(
-          "http://localhost:5255/api/transactions",
+          "http://0.0.0.0:5000/api/transactions",
           { headers: { Authorization: `Bearer ${token}` } }
         );
 

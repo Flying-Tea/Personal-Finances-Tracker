@@ -1,4 +1,3 @@
-import './App.css'
 import { HomeNavBar } from './components/ui/HomeNav'
 import HomeBg from './assets/HomeBg.jpg'
 import FeatureSection1 from './components/layouts/FeatureSection'

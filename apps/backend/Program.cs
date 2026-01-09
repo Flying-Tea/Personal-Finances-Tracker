@@ -44,9 +44,9 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("frontend", policy =>
     {
-        policy.WithOrigins("http://localhost:5173") // Vite dev server
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+        policy.AllowAnyOrigin() // Vite dev server
+        .AllowAnyHeader()
+        .AllowAnyMethod();
     });
 });
 
