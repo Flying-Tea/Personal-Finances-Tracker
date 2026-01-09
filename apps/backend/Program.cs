@@ -46,7 +46,6 @@ builder.Services.AddCors(options =>
     {
         policy.AllowAnyOrigin() // Vite dev server
         .AllowAnyHeader()
-        .AllowCredentials()
         .AllowAnyMethod();
     });
 });
