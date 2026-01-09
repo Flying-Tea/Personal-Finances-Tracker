@@ -44,7 +44,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("frontend", policy =>
     {
-        policy.AllowAnyOrigin() // Vite dev server
+        policy.WithOrigins("http://172.16.3.87:5173") // Vite dev server
         .AllowAnyHeader()
         .AllowAnyMethod();
     });
@@ -62,7 +62,7 @@ builder.Services.AddScoped(sp =>
 });
 
 // Server
-builder.WebHost.UseUrls("http://172.16.3.87:5173");
+builder.WebHost.UseUrls("http://0.0.0.0:5000");
 
 // Add controllers and Swagger
 builder.Services.AddControllers();
