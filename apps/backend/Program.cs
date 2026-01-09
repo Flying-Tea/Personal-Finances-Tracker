@@ -82,7 +82,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
+app.UseRouting();
 app.UseCors("frontend");
 
 app.UseAuthentication();
