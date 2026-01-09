@@ -11,15 +11,15 @@ DotNetEnv.Env.Load(); // Load .env
 var builder = WebApplication.CreateBuilder(args);
 
 // Load environment variables
-var dbUrl = Environment.GetEnvironmentVariable("DATABASE_URL")
-    ?? throw new Exception("DATABASE_URL missing in .env");
 
 var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY")
     ?? throw new Exception("JWT_KEY missing in .env");
 
+var dbPath = Path.Combine(AppContext.BaseDirectory, "app.db");
+
 // Database setup
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(dbUrl)
+    options.UseSqlite($"Data Source={dbPath}")
 );
 
 // JWT Authentication setup
@@ -61,13 +61,17 @@ builder.Services.AddScoped(sp =>
     return new AuthService(db, jwtKey);
 });
 
+// Server
+builder.WebHost.UseUrls("http://0.0.0.0:5000");
+
 // Add controllers and Swagger
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Adds cleanup database cleanup service
+// Adds services
 builder.Services.AddHostedService<CleanupService>();
+builder.Services.AddScoped<TransactionService>();
 
 var app = builder.Build();
 

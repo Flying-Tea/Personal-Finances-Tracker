@@ -43,21 +43,33 @@ namespace Backend.Services
         public string GenerateJwtToken(Guid userId, string email)
         {
             var creds = new SigningCredentials(_jwtKey, SecurityAlgorithms.HmacSha256);
-            var claims = new[]
+
+            var now = DateTime.UtcNow;
+
+            var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Iat,
+                    new DateTimeOffset(now).ToUnixTimeSeconds().ToString(),
+                    ClaimValueTypes.Integer64)
             };
 
             var token = new JwtSecurityToken(
+                issuer: "your-app",
+                audience: "your-app",
                 claims: claims,
-                expires: DateTime.UtcNow.AddHours(1),
+                notBefore: now,
+                expires: now.AddHours(1),
                 signingCredentials: creds
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
 
         // Send verification email via Brevo SMTP
         // public async Task SendVerificationEmailAsync(string toEmail, string code, string purpose)

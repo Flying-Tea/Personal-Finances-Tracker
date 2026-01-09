@@ -97,7 +97,6 @@ const Login = () => {
     const [password, setPassword] = React.useState("");
     const [error, setError] = React.useState("");
     const [loading, setLoading] = React.useState(false);
-    const [jwt, setJwt] = React.useState<string | null>(null); // in-memory JWT
     const navigate = useNavigate();
 
     const handleLogin = async (e: React.FormEvent) => {
@@ -121,7 +120,7 @@ const Login = () => {
         const res = await axios.post("http://localhost:5255/api/auth/login", { email, password });
         localStorage.setItem("email", email);
 
-        setJwt(res.data.token);
+        localStorage.setItem("token", res.data.token);
 
         // Redirect user after login
         navigate("/userHome");

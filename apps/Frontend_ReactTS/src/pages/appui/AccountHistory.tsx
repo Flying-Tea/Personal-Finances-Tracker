@@ -1,7 +1,8 @@
 import LeftSideBar from "@/components/ui/SideBar"
 import React from "react";
 import { motion } from "framer-motion";
-import GridComponent from "@/components/AGGrid";
+// import GridComponent from "@/components/AGGrid";
+import TransactionsGrid from "@/components/TransactionGrid";
 
 
 const AccountHistory: React.FC = () => {
@@ -20,7 +21,7 @@ const AccountHistory: React.FC = () => {
         </div>
 
         <div className="p-4">
-            <GridComponent />
+            <TransactionsGrid />
         </div>
             
 

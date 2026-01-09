@@ -36,17 +36,18 @@ public class AuthController : ControllerBase
         var code = _authService.GenerateCode();
         await _authService.SaveVerificationCodeAsync(user.Id, code, "register");
 
-        // Do NOT fail registration if email fails
-        try
-        {
-            // await _authService.SendVerificationEmailAsync(user.Email, code, "register"); Email sending disabled for now
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Email send failed: " + ex.Message);
-        }
-
-        return Ok(new { message = "User created. Please verify your email." });
+        // Do NOT fail registration if email fails (More email data)
+        // try
+        // {
+        //     // await _authService.SendVerificationEmailAsync(user.Email, code, "register"); Email sending disabled for now
+        // }
+        // catch (Exception ex)
+        // {
+        //     Console.WriteLine("Email send failed: " + ex.Message);
+        // }
+        
+        // Outputs JWT before verification typically it would be after but im not enforcing verification for now
+        return Ok(new { message = "User created. Please verify your email."});
     }
 
     [HttpPost("verify")]
@@ -71,14 +72,14 @@ public class AuthController : ControllerBase
         var code = _authService.GenerateCode();
         await _authService.SaveVerificationCodeAsync(user.Id, code, "register");
 
-        try
-        {
-            // await _authService.SendVerificationEmailAsync(user.Email, code, "register"); Email sending disabled for now
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Email resend failed: " + ex.Message);
-        }
+        // try (More Email Data)
+        // {
+        //     // await _authService.SendVerificationEmailAsync(user.Email, code, "register"); Email sending disabled for now
+        // }
+        // catch (Exception ex)
+        // {
+        //     Console.WriteLine("Email resend failed: " + ex.Message);
+        // }
 
         return Ok(new { message = "Verification email resent" });
     }
@@ -94,7 +95,8 @@ public class AuthController : ControllerBase
         //     return Unauthorized("Account not verified");
 
         var token = _authService.GenerateJwtToken(user.Id, user.Email);
-        return Ok(new { token });
+        Console.WriteLine("Generated Token: " + token);
+        return Ok(new { token});
     }
 
     [HttpPost("password-reset-request")]
@@ -108,14 +110,14 @@ public class AuthController : ControllerBase
         var code = _authService.GenerateCode();
         await _authService.SaveVerificationCodeAsync(user.Id, code, "password");
 
-        try
-        {
-            // await _authService.SendVerificationEmailAsync(user.Email, code, "password"); Email sending disabled for now 
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Password reset email failed: " + ex.Message);
-        }
+        // try (More Email Data)
+        // {
+        //     // await _authService.SendVerificationEmailAsync(user.Email, code, "password"); Email sending disabled for now 
+        // }
+        // catch (Exception ex)
+        // {
+        //     Console.WriteLine("Password reset email failed: " + ex.Message);
+        // }
 
         return Ok(new { message = "If the email exists, a reset code was sent." });
     }
