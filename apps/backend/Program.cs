@@ -62,7 +62,7 @@ builder.Services.AddScoped(sp =>
 });
 
 // Server
-builder.WebHost.UseUrls("http://0.0.0.0:5000");
+builder.WebHost.UseUrls("http://172.16.3.87:5173");
 
 // Add controllers and Swagger
 builder.Services.AddControllers();
