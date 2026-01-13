@@ -16,6 +16,8 @@ public class TransactionService
         Guid userId,
         CreateTransactionDto dto)
     {
+        var estZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+
         var transaction = new Transaction
         {
             UserId = userId,
@@ -23,7 +25,8 @@ public class TransactionService
             Type = dto.Type,
             Category = dto.Category,
             Description = dto.Description,
-            CreatedAt = DateTime.UtcNow
+            Date = dto.Date,
+            CreatedAt = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, estZone)
         };
 
         _db.Transactions.Add(transaction);

@@ -151,10 +151,13 @@ namespace Backend.Services
 
             if (!oldUsers.Any()) return;
 
+            // I need to delete when its 3hrs old and account verification = false
+
             var codesToDelete = await _db.VerificationCodes
                 .Where(c => oldUsers.Select(u => u.Id).Contains(c.UserId))
                 .ToListAsync();
 
+            //_db.Transactions.RemoveRange();
             _db.VerificationCodes.RemoveRange(codesToDelete);
             _db.Users.RemoveRange(oldUsers);
 
