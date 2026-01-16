@@ -56,7 +56,7 @@ const RecurringTransactionForm = ({ onClose }: RecurringTransactionFormProps) =>
 
         try {
         console.log("Submitting recurring transaction:", recurringTransaction);
-        await axios.post("http://172.16.4.3:5000/api/recurring-transactions", recurringTransaction,
+        await axios.post("http://172.16.4.3:5000/api/recurring-transactions", recurringTransaction, // 172.16.4.3:5000 swap to backend ip (Local host if needed)
             { headers: { Authorization: `Bearer ${token}` } }
         );
             window.location.reload(); // refresh page after adding

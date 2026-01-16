@@ -82,7 +82,7 @@ export const TransactionsGrid: React.FC = () => {
         if (!token) return;
 
         const response = await axios.get<Transaction[]>(
-          "http://172.16.4.3:5000/api/transactions", // 0.0.0.0:5000
+          "http://172.16.4.3:5000/api/transactions", // 172.16.4.3:5000 swap to backend ip (Local host if needed)
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
