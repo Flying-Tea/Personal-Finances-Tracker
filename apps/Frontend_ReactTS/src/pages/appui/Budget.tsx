@@ -1,6 +1,7 @@
 import LeftSideBar from "@/components/ui/SideBar"
 import React from "react";
 import { motion } from "framer-motion";
+import RecurringTransactionsPage from "@/components/RecurringTransactionsBox";
 
 const Budget: React.FC = () => {
     const [isOpen, setIsOpen] = React.useState(false);
@@ -14,11 +15,11 @@ const Budget: React.FC = () => {
         className="flex-1 overflow-auto">
 
         <div className = "flex bg-gray-800 shadow-md p-4 items-center">
-            <h1 className="text-3xl font-bold">Budgets</h1>
+            <h1 className="text-3xl font-bold">Billing - Automatic Transactions</h1>
         </div>
 
         <div className="p-8">
-            
+            <RecurringTransactionsPage/>
         </div>
 
         </motion.div>

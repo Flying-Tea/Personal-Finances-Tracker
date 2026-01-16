@@ -7,6 +7,7 @@ import { provideGlobalGridOptions } from 'ag-grid-community';
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import TransactionModal from "./layouts/TransactionFormModal";
+import { ActionsCellRenderer } from "./cell-renderers/actionsCellRenderer";
 
 // Register AG Grid modules
 ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
@@ -24,6 +25,7 @@ type Transaction = {
   description: string;
   createdAt: string;
   date: string;
+  actions: unknown;
 };
 
 const columnDefs: ColDef<Transaction>[] = [
@@ -50,6 +52,11 @@ const columnDefs: ColDef<Transaction>[] = [
         dateStyle: "medium",
         timeStyle: "short",
       }),
+  },
+  { // Maybe delete this in future I need to test when internet avaliable
+    field: "actions",
+    cellRenderer: ActionsCellRenderer,
+    maxWidth: 110
   }
 ];
 
@@ -99,7 +106,7 @@ export const TransactionsGrid: React.FC = () => {
       defaultColDef,
       pagination: true,
       paginationPageSize: 10,
-      rowHeight: 30,
+      rowHeight: 45,
       animateRows: true,
     };
 

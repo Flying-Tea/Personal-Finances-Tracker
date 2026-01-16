@@ -18,7 +18,9 @@ const Saving: React.FC = () => {
         </div>
 
         <div className="p-8">
-            
+            <div className="bg-amber-200 p-10 rounded-lg shadow-md max-w-6xl border place-items-start mx-auto text-black">
+                <h1 className="text-3xl font-bold">"I've decided to prioritize core functionality for the initial release to ensure stability and performance. This feature didn't make it into the first version, but it's on my roadmap for a future update."</h1>
+            </div>
         </div>
 
         </motion.div>

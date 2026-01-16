@@ -126,23 +126,32 @@ const SignUp1 = () => {
 
         try {
             // Register user
+            
             const registerRes = await axios.post("http://localhost:5255/api/auth/register", { email, password }); // 172.16.4.3:5000/
             setMessage(registerRes.data.message);
             setError("");
 
             localStorage.setItem("email", email);
             navigate("/Login");
-        } catch (err) {
+        } catch (err: unknown) {
             let errorMessage = "An unknown error occurred";
+
             if (axios.isAxiosError(err)) {
-            if (err.response && err.response.data) {
-                errorMessage = err.response.data as string;
-            } else {
+                const data = err.response?.data;
+
+                if (typeof data === "string") {
+                    errorMessage = data;
+                } else if (data?.message) {
+                    errorMessage = data.message;
+                } else if (data?.title) {
+                    errorMessage = data.title;
+                } else {
+                    errorMessage = err.message;
+                }
+            } else if (err instanceof Error) {
                 errorMessage = err.message;
             }
-            } else if (err instanceof Error) {
-            errorMessage = err.message;
-            }
+
             setError(errorMessage);
             setMessage("");
         }

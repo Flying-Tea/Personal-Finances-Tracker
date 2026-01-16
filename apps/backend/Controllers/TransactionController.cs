@@ -39,4 +39,17 @@ public class TransactionsController : ControllerBase
 
         return Ok(transactions);
     }
+
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> DeleteTransaction(int id)
+    {
+        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+        var deleted = await _transactionService
+            .DeleteTranscationAsync(userId, id);
+
+        if (!deleted) return NotFound();
+
+        return NoContent();
+    }
 }

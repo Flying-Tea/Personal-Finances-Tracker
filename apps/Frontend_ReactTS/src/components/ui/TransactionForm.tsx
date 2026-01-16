@@ -67,7 +67,7 @@ const TransactionForm = ({ onClose }: TransactionFormProps) => {
             },
         }
       );
-
+      window.location.reload();
       onClose?.(); // close modal after success
     } catch (err) {
       console.error("Failed to submit transaction", err);

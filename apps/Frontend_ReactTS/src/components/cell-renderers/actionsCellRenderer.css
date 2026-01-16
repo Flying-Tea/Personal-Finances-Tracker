@@ -1,8 +1,4 @@
-.buttonCell {
-  display: flex;
-  gap: 8px;
-  flex-direction: row-reverse;
-}
+
 
 .buttonCell button {
   appearance: none;
@@ -23,14 +19,6 @@
   justify-content: center;
   align-items: center;
   height: 40px;
-  width: 40px;
+  width: 45px;
 }
 
-.removeButton img {
-  width: 20px;
-}
-
-.buttonStopSelling {
-  height: 40px;
-  line-height: 1.8;
-}

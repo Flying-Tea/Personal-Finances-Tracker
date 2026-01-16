@@ -121,16 +121,19 @@ const Login = () => {
         localStorage.setItem("email", email);
 
         localStorage.setItem("token", res.data.token);
+        // Token Expiration
+        const ONE_HOUR = 60 * 60 * 1000;
+        localStorage.setItem("expiresAt", (Date.now() + ONE_HOUR).toString())
 
         // Redirect user after login
         navigate("/userHome");
     } catch (err: unknown) {
         if (axios.isAxiosError(err)) {
-        setError(err.response?.data || "Login failed. Please try again.");
+            setError(err.response?.data || "Login failed. Please try again.");
         } else if (err instanceof Error) {
-        setError(err.message);
+            setError(err.message);
         } else {
-        setError("Login failed. Please try again.");
+            setError("Login failed. Please try again.");
         }
     } finally {
         setLoading(false);

@@ -1,5 +1,4 @@
 import type { ICellRendererComp, ICellRendererParams } from "ag-grid-community";
-
 import "./actionsCellRenderer.css";
 
 export class ActionsCellRenderer implements ICellRendererComp {
@@ -11,46 +10,69 @@ export class ActionsCellRenderer implements ICellRendererComp {
     this.eGui = document.createElement("div");
     this.eGui.className = "buttonCell";
 
-    const onRemoveClick = () => {
+    const onRemoveClick = async () => {
       const rowData = node.data;
-      api.applyTransaction({ remove: [rowData] });
-    };
+      const transactionId = rowData.id; // MUST match backend DTO
 
-    const onStopSellingClick = () => {
-      const rowData = node.data;
+      const token = localStorage.getItem("token"); // or wherever you store JWT
+      if (!token) {
+        alert("Not authenticated");
+        return;
+      }
 
-      const isPaused = rowData.status === "paused";
-      const isOutOfStock = rowData.available <= 0;
+      try {
+        const res = await fetch(
+          `http://localhost:5255/api/transactions/${transactionId}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-      // Modify the status property
-      rowData.status = !isPaused
-        ? "paused"
-        : !isOutOfStock
-        ? "active"
-        : "outOfStock";
+        if (!res.ok) {
+          throw new Error("Delete failed");
+        }
 
-      // Refresh the row to reflect the changes
-      api.applyTransaction({ update: [rowData] });
+        // Only remove from grid AFTER backend confirms deletion
+        api.applyTransaction({ remove: [rowData] });
+      } catch (err) {
+        console.error(err);
+        alert("Failed to delete transaction");
+      }
     };
 
     const removeButton = document.createElement("button");
     removeButton.className = "button-secondary removeButton";
     removeButton.addEventListener("click", onRemoveClick);
-    removeButton.innerHTML = `<img src="/example/inventory/delete.svg" alt="delete" />`;
-    this.eGui.appendChild(removeButton);
+    removeButton.innerHTML = `
+      <svg
+        class="trashIcon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <polyline points="3 6 5 6 21 6"></polyline>
+        <path d="M19 6l-1 14H6L5 6"></path>
+        <path d="M10 11v6"></path>
+        <path d="M14 11v6"></path>
+        <path d="M9 6V4h6v2"></path>
+      </svg>
+    `;
 
-    const stopSellingButton = document.createElement("button");
-    stopSellingButton.className = "button-secondary buttonStopSelling";
-    stopSellingButton.addEventListener("click", onStopSellingClick);
-    stopSellingButton.textContent = "Hold Selling";
-    this.eGui.appendChild(stopSellingButton);
+    this.eGui.appendChild(removeButton);
   }
 
   public getGui(): HTMLElement {
     return this.eGui;
   }
 
-  public refresh(params: ICellRendererParams): boolean {
+  public refresh(): boolean {
     return false;
   }
 }

@@ -5,6 +5,8 @@ using Backend.Data;
 using Backend.Services;
 using DotNetEnv;
 using System.Text;
+using RecurringTransactionProcess;
+using System.Text.Json.Serialization;
 
 DotNetEnv.Env.Load(); // Load .env
 
@@ -61,6 +63,14 @@ builder.Services.AddScoped(sp =>
     return new AuthService(db, jwtKey);
 });
 
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(
+            new JsonStringEnumConverter()
+        );
+    });
+
 
 builder.WebHost.UseUrls(); // local
 // Server
@@ -73,7 +83,12 @@ builder.Services.AddSwaggerGen();
 
 // Adds services
 builder.Services.AddHostedService<CleanupService>();
+builder.Services.AddHostedService<RecurringService>();
 builder.Services.AddScoped<TransactionService>();
+builder.Services.AddScoped<RecurringTransactionService>();
+builder.Services.AddScoped<RecurringTransactionProcessor>();
+
+
 
 var app = builder.Build();
 

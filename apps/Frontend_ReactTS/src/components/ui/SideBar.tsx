@@ -3,11 +3,13 @@ import { motion } from "framer-motion";
 import { FaBars } from "react-icons/fa";
 import { SquareLibrary } from "lucide-react";
 import { ReuseButton } from "./MyButton";
+import ConfirmModal from "../layouts/LogoutConfirmModal";
+import { LogOutIcon } from "lucide-react";
 
 const sideBarItems = [
   { routerLink: "/userHome", icon: "🏠", title: "Dashboard" },
   { routerLink: "/accountHistory", icon: "💸", title: "Transactions" },
-  { routerLink: "/budgets", icon: "📊", title: "Budgets" },
+  { routerLink: "/budgets", icon: "📊", title: "Billing" },
   { routerLink: "/savings", icon: "📈", title: "Savings" },
   { routerLink: "/settings", icon: "⚙️", title: "Settings" },
 ];
@@ -43,6 +45,15 @@ const LeftSideBar: React.FC<Props> = ({isOpen, setIsOpen}) => {
       
     };
   }, []);
+
+  const [showLogoutModal, setShowLogoutModal] = React.useState(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    window.location.href = "/";
+  };
+
   return (
     <motion.div
     initial={{ width: 80 }}
@@ -99,6 +110,42 @@ const LeftSideBar: React.FC<Props> = ({isOpen, setIsOpen}) => {
             </a>
         ))}
         <div className="fixed bottom-4"> 
+          {/* Logout + Account */}
+          <div className="mt-auto mb-1"> 
+            <motion.button
+              onClick={() => setShowLogoutModal(true)}
+              initial={{ width: 50 }}
+              animate={{ width: isOpen ? 260 : 50 }}
+              transition={{ duration: 0.65 }}
+              className="flex items-center p-2 rounded hover:bg-red-600 transition-colors cursor-pointer overflow-hidden"
+            >
+              <LogOutIcon size={22} className="text-red-400 min-w-[22px] ml-2" />
+
+              {isOpen && (
+                <span className="ml-2 text-red-400 text-lg flex">
+                  {Array.from("Logout").map((char, i) => (
+                    <motion.span
+                      key={i}
+                      custom={i}
+                      initial="hidden"
+                      animate="visible"
+                      variants={textVariant}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </span>
+              )}
+            </motion.button>
+
+            <ConfirmModal
+              open={showLogoutModal}
+              onOpenChange={setShowLogoutModal}
+              title="Log out?"
+              message="Are you sure you want to log out?"
+              onConfirm={handleLogout}
+            />
+          </div>
           <motion.div
           initial={{ width: 50 }}
           animate={{ width: isOpen ? 260 : 50 }}

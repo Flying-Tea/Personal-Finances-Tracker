@@ -40,4 +40,18 @@ public class TransactionService
             .OrderByDescending(t => t.CreatedAt)
             .ToListAsync();
     }
+
+    public async Task<bool> DeleteTranscationAsync(Guid userID, int transactionID)
+    {
+        var transaction = await _db.Transactions
+            .Where(t => t.Id == transactionID && t.UserId == userID)
+            .FirstOrDefaultAsync();
+
+        if (transaction == null) return false;
+
+        _db.Transactions.Remove(transaction);
+        await _db.SaveChangesAsync();
+
+        return true;
+    }
 }
