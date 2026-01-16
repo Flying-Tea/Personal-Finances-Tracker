@@ -60,7 +60,7 @@ const TransactionForm = ({ onClose }: TransactionFormProps) => {
 
     try {
       console.log("Submitting:", transaction);
-      await axios.post("http://localhost:5255/api/transactions", transaction,
+      await axios.post("http://172.16.4.3:5000/api/transactions", transaction,
         {
             headers: {
                 Authorization:`Bearer ${token}`,

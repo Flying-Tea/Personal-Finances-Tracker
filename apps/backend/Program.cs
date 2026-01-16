@@ -72,9 +72,9 @@ builder.Services.AddControllers()
     });
 
 
-builder.WebHost.UseUrls(); // local
+// builder.WebHost.UseUrls(); // local
 // Server
-// builder.WebHost.UseUrls("http://0.0.0.0:5000");
+builder.WebHost.UseUrls("http://0.0.0.0:5000");
 
 // Add controllers and Swagger
 builder.Services.AddControllers();

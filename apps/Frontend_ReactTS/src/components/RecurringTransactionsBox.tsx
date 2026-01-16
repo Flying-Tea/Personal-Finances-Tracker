@@ -40,7 +40,7 @@ export default function RecurringTransactionsPage() {
       const token = localStorage.getItem("token");
       if (!token) return;
 
-      await axios.delete(`http://localhost:5255/api/recurring-transactions/${id}`, {
+      await axios.delete(`http://172.16.4.3:5000/api/recurring-transactions/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

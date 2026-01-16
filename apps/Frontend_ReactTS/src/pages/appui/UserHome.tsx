@@ -28,7 +28,7 @@ const UserHome: React.FC = () => {
       if (!token) return;
 
       const res = await axios.get<RecurringTransaction[]>(
-        "http://localhost:5255/api/recurring-transactions",
+        "http://172.16.4.3:5000/api/recurring-transactions",
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
