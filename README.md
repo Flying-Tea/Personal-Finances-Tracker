@@ -86,6 +86,43 @@ A local host of your choice.
 
 ---
 
+## How to run my Server (For My Teachers Use)
+
+Open 2 copies of Putty with the IP: 172.16.4.3 and port 22
+You must be on school wifi to run this!
+
+Note: You can use ls to view all files in that directory!
+
+### Server Backend
+
+**First Copy Of Putty:**
+
+```bash
+cd Personal-Finances-Tracker/apps/backend
+```
+
+Run code:
+
+```bash
+dotnet run
+```
+
+### Server Frontend
+
+**Second Copy Of Putty:**
+
+```bash
+cd Personal-Finances-Tracker/apps/Frontend_ReactTS
+```
+
+Run code:
+
+```bash
+npm run dev
+```
+
+Open the website: <http://172.16.4.57:5173/>
+
 ## Acknowledgements
 
 - DB Browser for SQLite for database testing
