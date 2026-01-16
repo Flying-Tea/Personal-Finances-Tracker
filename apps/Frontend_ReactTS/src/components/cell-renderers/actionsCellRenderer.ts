@@ -22,7 +22,7 @@ export class ActionsCellRenderer implements ICellRendererComp {
 
       try {
         const res = await fetch(
-          `http://localhost:5255/api/transactions/${transactionId}`,
+          `http://172.16.4.3:5000/api/transactions/${transactionId}`,
           {
             method: "DELETE",
             headers: {
