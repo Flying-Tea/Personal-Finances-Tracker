@@ -9,6 +9,7 @@ import AccountHistory from './pages/appui/AccountHistory.tsx'
 import Budgets from './pages/appui/Budget.tsx'
 import Saving from './pages/appui/Saving.tsx'
 import Login from './pages/Login.tsx'
+import Settings from './pages/appui/Settings.tsx'
 
 
 
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
   {
     path: '/savings',
     element: <Saving />,
+  },
+    {
+    path: '/settings',
+    element: <Settings/>,
   },
   {
     path: '/Login',
