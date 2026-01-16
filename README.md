@@ -86,12 +86,12 @@ A local host of your choice.
 
 ---
 
-## How to run my Server (For My Teachers Use)
+## How To Run My Ubuntu Server (For My Teachers Use)
 
 Open 2 copies of Putty with the IP: 172.16.4.3 and port 22
 You must be on school wifi to run this!
 
-Note: You can use ls to view all files in that directory!
+Note: You can use "ls" to view all files in that directory!
 
 ### Server Backend
 
@@ -122,6 +122,7 @@ npm run dev
 ```
 
 Open the website: <http://172.16.4.57:5173/>
+Use a desktop device for best experience.
 
 ## Acknowledgements
 
